@@ -1,0 +1,8 @@
+{
+  "name": "garage-gym-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/albondad/garage-gym-manager.git",
+  "author": "Al Bondad <albondad@gmail.com>",
+  "license": "MIT"
+}
