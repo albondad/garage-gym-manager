@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { FirebaseService } from './firebase/firebase.service';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 
 @Injectable()
-export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+export class AppService implements OnModuleInit {
+  onModuleInit() {
+    FirebaseService.start();
   }
 }
