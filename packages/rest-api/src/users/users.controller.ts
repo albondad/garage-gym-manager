@@ -22,7 +22,7 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.readAll();
+    return this.usersService.readList();
   }
 
   @Get(':id')
