@@ -1,23 +1,37 @@
+import { CreateUserDtoModel } from './models/create-user-dto.model';
+import { FirebaseAdminService } from 'src/firebase-admin/firebase-admin.service';
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { UpdateUserDtoModel } from './models/update-user-dto.model';
+import { UserListModel } from './models/user-list.model';
+import { UserModel } from './models/user.model';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDtoModel) {
     return 'This action adds a new user';
   }
 
   async readList() {
-    return `This action reads a user list`;
+    const usersCollectionQuerySnapshot = await FirebaseAdminService.app
+      .firestore()
+      .collection('users')
+      .get();
+
+    const userListModel: UserListModel = new UserListModel();
+
+    usersCollectionQuerySnapshot.forEach((element) => {
+      const userModel = element.data() as UserModel;
+      userListModel.list.push(userModel);
+    });
+
+    return userListModel;
   }
 
   readOne(id: number) {
     return `This action reads a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number, updateUserDto: UpdateUserDtoModel) {
     return `This action updates a #${id} user`;
   }
 
