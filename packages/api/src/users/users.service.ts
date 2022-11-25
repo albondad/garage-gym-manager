@@ -12,14 +12,14 @@ export class UsersService {
   }
 
   async readList() {
-    const usersCollectionQuerySnapshot = await FirebaseAdminService.app
+    const usersQuerySnapshot = await FirebaseAdminService.app
       .firestore()
       .collection('users')
       .get();
 
-    const userListModel: UserListModel = new UserListModel();
+    const userListModel = new UserListModel();
 
-    usersCollectionQuerySnapshot.forEach((element) => {
+    usersQuerySnapshot.forEach((element) => {
       const userModel = element.data() as UserModel;
       userListModel.list.push(userModel);
     });
@@ -27,8 +27,15 @@ export class UsersService {
     return userListModel;
   }
 
-  readOne(id: number) {
-    return `This action reads a #${id} user`;
+  async read(id: string) {
+    const usersDocumentSnapshot = await FirebaseAdminService.app
+      .firestore()
+      .doc(`users/${id}`)
+      .get();
+
+    const userModel = usersDocumentSnapshot.data();
+
+    return userModel;
   }
 
   update(id: number, updateUserDto: UpdateUserDtoModel) {

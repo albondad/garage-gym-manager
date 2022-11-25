@@ -21,13 +21,13 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
+  readList() {
     return this.usersService.readList();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.readOne(+id);
+  read(@Param('id') id: string) {
+    return this.usersService.read(id);
   }
 
   @Patch(':id')
