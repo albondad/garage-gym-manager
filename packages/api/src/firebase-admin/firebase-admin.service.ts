@@ -1,12 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import firebaseAdmin from 'firebase-admin';
 
 @Injectable()
-export class FirebaseAdminService {
+export class FirebaseAdminService implements OnModuleInit {
   static app: firebaseAdmin.app.App;
   static isAppInitialized: boolean;
 
-  setup() {
+  onModuleInit() {
+    FirebaseAdminService.setup();
+  }
+
+  static setup() {
     const serviceAccount = Object({
       type: process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_TYPE,
       project_id: process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT_PROJECT_ID,
