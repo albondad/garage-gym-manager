@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+import { NavigationBarBrand } from "..";
 
 export const NavigationBar = () => {
   return (
@@ -9,7 +10,7 @@ export const NavigationBar = () => {
       display="flex"
       height="4rem"
     >
-      test
+      <NavigationBarBrand />
     </Box>
   );
 };
