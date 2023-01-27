@@ -1,9 +1,14 @@
-import { HomePage, Layout } from "../components";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-export default function Home() {
-  return (
-    <Layout>
-      <HomePage />
-    </Layout>
-  );
-}
+const Index = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/home");
+  }, []);
+
+  return null;
+};
+
+export default Index;
