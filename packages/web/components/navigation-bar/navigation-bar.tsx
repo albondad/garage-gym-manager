@@ -1,16 +1,29 @@
-import { Box } from "@chakra-ui/react";
-import { NavigationBarBrand } from "..";
+import {
+  brandClassName,
+  containerClassName,
+  linksClassName,
+  linkClassName,
+  brandDefaultTextClassName,
+  brandRedTextClassName,
+} from "./navigation-bar.styles";
+import { ComponentProps } from "react";
 
-export const NavigationBar = () => {
+export type NavigationBarPropsType = ComponentProps<"div">;
+
+export const NavigationBar = ({
+  children,
+  ...restProps
+}: NavigationBarPropsType) => {
   return (
-    <Box
-      alignItems="center"
-      backgroundColor="#000000"
-      color="#ffffff"
-      display="flex"
-      height="4rem"
-    >
-      <NavigationBarBrand />
-    </Box>
+    <div className={containerClassName} {...restProps}>
+      <div className={brandClassName}>
+        <span className={brandRedTextClassName}>{"AL'S"}</span>
+        <span className={brandDefaultTextClassName}> GYM</span>
+      </div>
+      <div className={linksClassName}>
+        <a className={linkClassName}>Home</a>
+        <a className={linkClassName}>Login</a>
+      </div>
+    </div>
   );
 };

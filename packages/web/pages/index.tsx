@@ -1,5 +1,9 @@
-import { NavigationBar } from "../components";
+import { HomePage, Layout } from "../components";
 
-export default function Index() {
-  return <NavigationBar></NavigationBar>;
+export default function Home() {
+  return (
+    <Layout>
+      <HomePage />
+    </Layout>
+  );
 }
