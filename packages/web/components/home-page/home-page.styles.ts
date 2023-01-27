@@ -10,6 +10,7 @@ export const headingClassName = css`
   font-weight: 700;
   line-height: 1.5em;
   text-align: center;
+  margin: 0rem;
 `;
 
 export const buttonClassName = css`
