@@ -6,8 +6,9 @@ import {
   brandDefaultTextClassName,
   brandRedTextClassName,
 } from "./navigation-bar.styles";
-import { ComponentProps } from "react";
+import { ComponentProps, useContext } from "react";
 import { useRouter } from "next/router";
+import { AuthenticationContext } from "../../contexts";
 
 export type NavigationBarPropsType = ComponentProps<"div">;
 
@@ -16,6 +17,7 @@ export const NavigationBar = ({
   ...restProps
 }: NavigationBarPropsType) => {
   const router = useRouter();
+  const authenticationContext = useContext(AuthenticationContext);
 
   const handleHomeClick = () => {
     router.push("/home");
@@ -23,6 +25,10 @@ export const NavigationBar = ({
 
   const handleSignInClick = () => {
     router.push("/sign-in");
+  };
+
+  const handleSignOutClick = () => {
+    authenticationContext.signOut();
   };
 
   return (
@@ -35,9 +41,16 @@ export const NavigationBar = ({
         <a className={linkClassName} onClick={handleHomeClick}>
           Home
         </a>
-        <a className={linkClassName} onClick={handleSignInClick}>
-          Sign In
-        </a>
+        {!authenticationContext.isAuthenticated && (
+          <a className={linkClassName} onClick={handleSignInClick}>
+            Sign In
+          </a>
+        )}
+        {authenticationContext.isAuthenticated && (
+          <a className={linkClassName} onClick={handleSignOutClick}>
+            Sign Out
+          </a>
+        )}
       </div>
     </div>
   );
