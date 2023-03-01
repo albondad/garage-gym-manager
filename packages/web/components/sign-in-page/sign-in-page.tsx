@@ -6,7 +6,7 @@ import {
   inputContainerClassName,
   signInPageClassName,
 } from "./sign-in-page.styles";
-import { Button, FormErrorMessage, Input, Label } from "..";
+import { Button, Box, FormErrorMessage, Input, Label } from "..";
 import { ComponentProps, useContext } from "react";
 import { signInFormikValidationSchema } from "./sign-in-page.utilities";
 import { useFormik } from "formik";
@@ -35,7 +35,7 @@ export const SignInPage = ({ children, ...restProps }: SignInPagePropsType) => {
 
   return (
     <div className={signInPageClassName} {...restProps}>
-      <div className={containerClassName}>
+      <Box>
         <h1 className={headingClassName}>Sign In</h1>
         <form className={formClassName} onSubmit={formik.handleSubmit}>
           <div className={inputContainerClassName}>
@@ -61,7 +61,7 @@ export const SignInPage = ({ children, ...restProps }: SignInPagePropsType) => {
             <Button type="submit">Sign In</Button>
           </div>
         </form>
-      </div>
+      </Box>
     </div>
   );
 };
