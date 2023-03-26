@@ -7,8 +7,22 @@ import { UserModel } from './models/user.model';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDtoModel) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDtoModel) {
+    const userRecord = await FirebaseAdminService.app.auth().createUser({
+      email: createUserDto.email,
+    });
+
+    const userDocumentReference = await FirebaseAdminService.app
+      .firestore()
+      .collection('users')
+      .add({
+        email: createUserDto.email,
+        firstName: createUserDto.firstName,
+        lastName: createUserDto.lastName,
+        id: userRecord.uid,
+      });
+    console.log('find me, userDocumentReference', userDocumentReference);
+    return 'This action adds a new user test1';
   }
 
   async readList() {
